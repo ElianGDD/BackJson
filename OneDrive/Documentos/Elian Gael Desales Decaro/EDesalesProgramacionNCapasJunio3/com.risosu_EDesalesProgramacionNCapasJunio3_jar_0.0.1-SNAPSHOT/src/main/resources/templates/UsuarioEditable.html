@@ -1,0 +1,118 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+    <body layout:fragment="body">
+        <div class="container">
+            <div class="container col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Titulo -->
+                        <div style="background-color: gray">
+                            <figure class="text-center">
+                                <blockquote class="blockquote">
+                                    <p class="text-light">Usuario Editable.</p>
+                                </blockquote>
+
+                            </figure>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        NOMBRE<br>
+                                        <label th:text="|${usuarioDireccion.Usuario.nombre} ${usuarioDireccion.Usuario.apellidoPaterno} ${usuarioDireccion.Usuario.apellidoMaterno}|"></label>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">DATOS PERSONALES USUARIO</h5>
+                                        <p class="card-text" ></p>
+                                        <!--  Boton para editar datos normales usuario-->
+                                        <a  class="btn btn-primary" th:href="@{/Presentacion/formeditable?idUsuario=}+${usuarioDireccion.Usuario.idUsuario}" ><i class="bi bi-pen-fill"></i></a>
+                                        <!--   th:href="@{/Presentacion/formeditable(idUsuario=${usuarioDireccion.Alumno.idUsuario})}"-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="container-center">
+                                    <div class="card">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <a th:href="@{|/Presentacion/formeditable?idUsuario=${usuarioDireccion.Usuario.idUsuario}&idDireccion=0|}" 
+                                                           class="btn btn-primary">
+                                                            AGREGAR NUEVA UBICACION
+                                                        </a>
+                                                        <!--     th:href="@{/Presentacion/formeditable(idUsuario=${usuarioDireccion.Alumno.idUsuario}, idDireccion=0)}"-->
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <h5 class="card-title">Ubicacion Usuario</h5>
+                                                        <table class="table table-striped-columns ">
+                                                            <tbody>
+                                                                <tr th:each="direccion : ${usuarioDireccion.Direcciones}">
+                                                                    <td th:text="|${direccion.Calle} ${direccion.NumeroInterior} ${direccion.NumeroExterior}|">
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <a class="btn btn-primary" 
+                                                                           th:href="@{|/Presentacion/formeditable?idUsuario=${usuarioDireccion.Usuario.idUsuario}&amp;idDireccion=${direccion.IdDireccion}|}">
+                                                                            <i class="bi bi-pen-fill"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a class="btn btn-primary" 
+                                                                           th:href="|@{/Presentacion/delete/direccion?idDireccion=}${direccion.IdDireccion}|">
+                                                                            <i class="bi bi-trash3-fill"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+
+                                                        </table>
+                                                        <!--  th:href="@{/Presentacion/formeditable(idUsuario=${Direccion.Alumno.idUsuario}, idDireccion=${direccion?.idDireccion})}"-->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+              <a th:href="@{/Presentacion}">
+                <td><button class="btn btn-primary "><i class="bi bi-arrow-return-left"></i></button></td>
+            </a>
+        </div>
+        
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script>
+
+
+        </script>
+    </body>
+</html>

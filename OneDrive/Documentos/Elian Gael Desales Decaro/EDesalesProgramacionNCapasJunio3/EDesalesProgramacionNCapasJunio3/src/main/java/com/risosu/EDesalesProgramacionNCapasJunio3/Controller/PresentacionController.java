@@ -276,7 +276,7 @@ public class PresentacionController {
 //        
 //        List<UsuarioDireccion> usuarioDireccion = ( List<UsuarioDireccion>)usuarioDAOImplementation.GetDatosPorNombre(usuario).objects;
 
-        model.addAttribute("usuarioDireccion", usuarioDAOImplementation.GetDatosPorNombre(usuario).objects);
+        model.addAttribute("usuarioDireccion", iUsuarioJPADAOImplementation.GetBusquedaDinamica(usuario).objects);
         model.addAttribute("busquedaAbierta", new Usuario());
         return "Presentacion";
     }
