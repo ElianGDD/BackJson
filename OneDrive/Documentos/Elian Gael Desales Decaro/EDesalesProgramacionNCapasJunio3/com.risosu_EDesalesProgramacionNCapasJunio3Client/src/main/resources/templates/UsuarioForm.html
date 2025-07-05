@@ -1,0 +1,340 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+    <body layout:fragment="body">
+        
+        <div class = "container">
+
+            <div class="container col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Titulo -->
+
+                        <div style="background-color: gray">
+                            <figure class="text-center">
+                                <blockquote class="blockquote">
+                                    <p class="text-light">Formulario.</p>
+                                </blockquote>
+
+                            </figure>
+                        </div>
+
+
+
+                        <!-- Formulario -->
+
+                        <form method="post" th:object="${usuarioDireccion}" th:action="@{/Presentacion/form}" enctype="multipart/form-data">
+                            
+                            <input type="hidden" th:field="*{Usuario.idUsuario}">
+                            <input type="hidden" th:field="*{Direccion.IdDireccion}">
+                            
+                            <div id="seccion_datos_basicos"  th:if="*{(Usuario.idUsuario == 0 && Direccion.IdDireccion == 0)|| (Usuario.idUsuario >0 && Direccion.IdDireccion == -1)}">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <input type="file" class="form-control" id="fotoPerfil" accept="image/*" name="imagenFile">
+                                        <img  style="width: 150px" th:src="${usuarioDireccion.Usuario.ImagenPerfil == null } ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png' :  'data:image/png;base64,'+ ${usuarioDireccion.Usuario.ImagenPerfil}">
+                                        <!-- comment -->
+                                        <!--<img  style="width: 100px" th:src="${usuarioDireccion.Usuario.ImagenPerfil == null } ? 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fes%2Fsearch%3Fq%3Dusuario&psig=AOvVaw1_m8vmOElsMuk_Ms5_bgc_&ust=1750371244981000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLDllZf_-40DFQAAAAAdAAAAABAE' :  'data:image/png;base64,'+ ${alumnoDireccion.Usuario.ImagenPerfil}">-->
+
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="row">
+
+
+                                            <div class="mb-3 col-6" >
+                                                <label class="form-label">Nombre</label>
+                                                <input id="NombreAlumno" type="text" class="form-control" placeholder="Nombre" th:field="*{Usuario.nombre}" onpaste="return false">
+                                                <span class="text-danger"  th:if="${#fields.hasErrors('Usuario.nombre')}" th:errors="*{Usuario.nombre}"></span>
+
+
+                                            </div>
+                                            <div class="mb-3 col-6">
+                                                <label  class="form-label">Apellido Paterno</label>
+                                                <input id="ApellidoPaternoAlumno" type="text" class="form-control" placeholder="Apellido Paterno" th:field="*{Usuario.apellidoPaterno}">
+                                                <span class="text-danger"  th:if="${#fields.hasErrors('Usuario.apellidoPaterno')}" th:errors="*{Usuario.apellidoPaterno}"></span>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3 col-6">
+                                                <label  class="form-label">Apellido Materno</label>
+                                                <input id="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno" th:field="*{Usuario.apellidoMaterno}">
+                                                <<span class="text-danger" th:if="${#fields.hasErrors('Usuario.apellidoMaterno')}" th:errors="*{Usuario.apellidoMaterno}"></span>
+                                            </div> 
+                                            <div class="mb-3 col-6">
+                                                <label  class="form-label">Fecha Nacimiento</label>
+                                                <input id="fechaNacimiento" type="date" class="form-control"  th:value="*{Usuario.fechaNacimiento}" th:field="*{Usuario.FechaNacimiento}">
+                                                <span class="text-danger" th:if="${#fields.hasErrors('Usuario.fechaNacimiento')}" th:errors="*{Usuario.fechaNacimiento}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div> 
+
+
+                                <div class="row">
+                                    <div class="mb-3 col-3">
+                                        <label  class="form-label">Nombre de usuario</label>
+                                        <input id="nombreUsuario" type="text" class="form-control" placeholder="Nombre de usuario" th:field="*{Usuario.userName}">
+                                        <span class="text-dange" th:if="${#fields.hasErrors('Usuario.userName')}" th:errors="*{Usuario.userName}"></span>
+                                    </div>
+
+                                    <div class="mb-3 col-3">
+                                        <label for="exampleInputPassword1" class="form-label">Contraseña Usuario</label>
+                                        <input id="contrasenaUsuario" type="password" class="form-control" placeholder="Contraseña Usario" th:field="*{Usuario.password}">
+                                        <<span class="text-danger" th:if="${#fields.hasErrors ('Usuario.password')}" th:errors="*{Usuario.password}"></span>
+                                    </div>
+
+                                    <div class="mb-3 col-3">
+                                        <label  class="form-label">Sexo</label>
+                                        <div class="form-check">
+                                            <input id="sexoMasculino" type="radio" class="form-check-input"  name="Sexo" value="H" th:field="*{Usuario.sexo}">
+                                            <label class="form-check-label" for="radioDefault1">
+                                                Masculino
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="sexoFemenino" type="radio"  class="form-check-input" name="Sexo" value="M" th:field="*{Usuario.sexo}">
+                                            <label class="form-check-label" for="radioDefault2">
+                                                Femenino
+                                            </label>
+
+                                        </div>   
+
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="form-label">Roles</label>
+                                        
+                                        <select id="ddlrol" class="form-select" aria-label="Default select example"  th:field="*{Usuario.Roll.IdRoll}" >
+                                            <option selected value=0 >Selecciona Roll</option>
+                                            <option th:each="Roll : ${Roll}" th:value="${Roll.IdRoll}" th:text="${Roll.nombre}" >One</option>
+                                        </select> 
+                                    </div>
+
+                                </div>  
+
+
+                                <div class="row">
+                                    <div class="mb-3 col-3">
+                                        <label  class="form-label">Celular</label>
+                                        <input id="celularUsuario" type="text" class="form-control" th:field="*{Usuario.celular}">
+                                        <span class="text-danger" th:if="${#fields.hasErrors('Usuario.celular')}" th:errors></span>
+                                    </div>
+                                    <div class="mb-3 col-3">
+                                        <label  class="form-label">Telefono</label>
+                                        <input id="telefonoUsuario" type="text" class="form-control" th:field="*{Usuario.telefono}">
+                                    </div>
+                                    <div class="mb-3 col-3">
+                                        <label  class="form-label">Curp</label>
+                                        <input id="curpUsuario" type="text" class="form-control" th:field="*{Usuario.curp}">
+                                    </div>
+                                    <div class="mb-3 col-3">
+                                        <label  class="form-label">Email</label>
+                                        <input id="emailUsuario" type="text" class="form-control" th:field="*{Usuario.email}">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div id="seccion_datos_direccion" th:if="*{(Usuario.idUsuario == 0 && Direccion.IdDireccion == 0)|| (Usuario.idUsuario > 0 && Direccion.IdDireccion == 0) || (Usuario.idUsuario > 0 && Direccion.IdDireccion > 0)}">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label class="form-label">Pais</label>
+                                        <select id="ddlpais" class="form-select" aria-label="Default select example" th:field="*{Direccion.Colonia.Municipio.Estado.Pais.IdPais}">
+                                            <option selected value=0 >Selecciona País</option>
+                                            <option th:each="pais : ${pais}" th:value="${pais.idPais}" th:text="${pais.nombre}" >One</option>
+                                        </select> 
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="form-label">Estado</label>
+                                        <select id="ddlestado" class="form-select" aria-label="Default select example" th:field="*{Direccion.Colonia.Municipio.Estado.IdEstado}">
+                                            <option selected value=0 > Selecciona Estado</option>
+                                            <option th:value="*{Direccion.Colonia.Municipio.Estado.IdEstado}" th:text="*{Direccion.Colonia.Municipio.Estado.Nombre}" >One</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="form-label">Municipio</label>
+                                        <select id="ddlmunicipio" class="form-select" aria-label="Default select example" th:field="*{Direccion.Colonia.Municipio.IdMunicipio}">
+                                            <option selected value=0>Selecciona Municipio</option>
+                                             <option th:value="*{Direccion.Colonia.Municipio.IdMunicipio}" th:text="*{Direccion.Colonia.Municipio.Nombre}" >One</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="form-label">Colonia</label>
+                                        <select id="ddlcolonia" class="form-select" th:field="*{Direccion.Colonia.IdColonia}"  aria-label="Default select example">
+                                            <option selected th:value="*{Direccion.Colonia.IdColonia}" th:text="*{Direccion.Colonia.Nombre}" >Selecciona Colonia</option>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-3 mb-3">
+                                        <label class="form-label">Calle</label>
+                                        <input id="ddlCalle" type="text" name="Calle"  class="form-control"  th:field="*{Direccion.Calle}" >
+                                    </div>
+                                    <div class="col-3 mb-3">
+                                        <label class="form-label">Numero Interior</label>
+                                        <input id="ddlNumeroInterior" type="text" name="NumeroInterior"  class="form-control" th:field="*{Direccion.NumeroInterior}">
+                                    </div>
+                                    <div class="col-3 mb-3">
+                                        <label class="form-label">Numero Exterior</label>
+                                        <input id="ddlNumeroExterior" type="text"  name="NumeroExterior"  class="form-control" th:field="*{Direccion.NumeroExterior}">
+                                    </div>
+                                    <div class="col-3 mb-3">
+                                        <label class="form-label">Codigo Postal</label>
+                                        <input id="ddlcodiogopostal" type="text" name="CodigoPostal"  class="form-control" th:field="*{Direccion.Colonia.CodigoPostal}">
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary mt-2 "><i class="bi bi-arrow-bar-up"></i></button>
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <a th:href="@{/Presentacion}">
+                <td><button class="btn btn-primary "><i class="bi bi-arrow-return-left"></i></button></td>
+            </a>
+        </div>
+
+        <style>
+            .correct {
+                border-color: #28a745 !important;
+                background-color: rgba(40, 167, 69, 0.1) !important;
+            }
+            .error {
+                border-color: #dc3545 !important;
+                background-color: rgba(220, 53, 69, 0.1) !important;
+            }
+            .error-msg {
+                color: #dc3545;
+                font-size: 0.875em;
+                margin-top: 0.25rem;
+            }
+        </style>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script>
+
+            $(document).ready(function () {
+                // Cargar estados
+                $("#ddlpais").change(function () {
+                    let id = $(this).val();
+                    if (id && id != '0') {
+                        $.ajax({
+                            url: "/Presentacion/GetEstadosBYIdPais/" + id,
+                            type: 'GET',
+                            datatype: "json",
+                            success: function (response) {
+                                $("#ddlestado").empty();
+                                $("#ddlestado").append("<option value=0 selected>Selecciona un estado</option>");
+                                $.each(response.objects, function (i, estado) {
+                                    $("#ddlestado").append("<option value=" + estado.idEstado + ">" + estado.nombre + "</option>");
+                                });
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log('Error en la solicitud AJAX:', jqXHR, textStatus, errorThrown);
+                            }
+                        });
+                    }
+                });
+
+                // Cargar municipios
+                $("#ddlestado").change(function () {
+                    let id = $(this).val();
+                    if (id && id != '0') {
+                        $.ajax({
+                            url: "/Presentacion/GetMunicipiosByIdEstado/" + id,
+                            type: 'GET',
+                            datatype: "json",
+                            success: function (response) {
+                                $("#ddlmunicipio").empty();
+                                $("#ddlmunicipio").append("<option value=0 selected>Selecciona Municipio</option>");
+                                $.each(response.objects, function (i, municipio) {
+                                    $("#ddlmunicipio").append("<option value=" + municipio.idMunicipio + ">" + municipio.nombre + "</option>");
+                                });
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log('Error en la solicitud AJAX:', jqXHR, textStatus, errorThrown);
+                            }
+                        });
+                    }
+                });
+
+                // Cargar colonias
+                $("#ddlmunicipio").change(function () {
+                    let id = $(this).val();
+                    if (id && id != '0') {
+                        $.ajax({
+                            url: "/Presentacion/GetColoniaByIdMunicipio/" + id,
+                            type: 'GET',
+                            datatype: "json",
+                            success: function (response) {
+                                $("#ddlcolonia").empty();
+                                $("#ddlcolonia").append("<option value=0 selected>Selecciona una colonia</option>");
+                                $.each(response.objects, function (i, colonia) {
+                                    $("#ddlcolonia").append(
+                                            "<option value='" + colonia.idColonia + "' " +
+                                            "data-codigopostal='" + colonia.codigoPostal + "'>" +
+                                            colonia.nombre + "</option>"
+                                            );
+                                });
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log('Error en la solicitud AJAX:', jqXHR, textStatus, errorThrown);
+                            }
+                        });
+                    }
+                });
+
+                // Actualizar código postal
+                $("#ddlcolonia").change(function () {
+                    var selectedOption = $(this).find("option:selected");
+                    var codigoPostal = selectedOption.data("codigopostal") || "";
+                    $("#ddlcodiogopostal").val(codigoPostal);
+                });
+            });
+
+        </script>
+
+        <script>
+            function SoloLetras(input) {
+                let value = input.value;
+                // Expresión regular que solo permite letras (mayúsculas y minúsculas) y espacios
+                let regex = /^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+
+                // Remover clases anteriores
+                $(input).removeClass("correct error");
+                $(input).next(".error-msg").text("");
+
+                if (value === "") {
+                    // Si está vacío, no mostrar nada
+                    return;
+                }
+
+                if (regex.test(value)) {
+                    $(input).addClass("correct");
+                } else {
+                    $(input).addClass("error");
+                    $(input).next(".error-msg").text("Solo se permiten letras mayúsculas y minúsculas");
+                }
+            }
+        </script>
+    </body>
+</html>
+
