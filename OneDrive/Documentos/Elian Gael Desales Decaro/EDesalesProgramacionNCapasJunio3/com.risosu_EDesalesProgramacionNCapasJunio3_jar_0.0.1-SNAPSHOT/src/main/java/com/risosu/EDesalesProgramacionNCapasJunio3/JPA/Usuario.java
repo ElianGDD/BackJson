@@ -1,5 +1,6 @@
 package com.risosu.EDesalesProgramacionNCapasJunio3.JPA;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,13 +42,19 @@ public class Usuario {
     private String celular;
     @Column(name = "curp")
     private String curp;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idroll")
     public Roll Roll;
     @Lob
     @Column(name = "imagenperfil")
     private String ImagenPerfil;
-
+    @Column(name = "status")
+    private int Status;
+    
+    
+    
+    
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -160,4 +167,12 @@ public class Usuario {
         this.ImagenPerfil = ImagenPerfil;
     }
 
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int Status) {
+        this.Status = Status;
+    }
+    
 }

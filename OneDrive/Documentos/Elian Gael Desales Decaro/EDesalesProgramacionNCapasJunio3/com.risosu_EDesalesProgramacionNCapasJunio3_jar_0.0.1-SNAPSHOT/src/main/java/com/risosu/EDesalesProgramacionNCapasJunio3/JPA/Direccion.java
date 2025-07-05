@@ -1,6 +1,7 @@
 package com.risosu.EDesalesProgramacionNCapasJunio3.JPA;
 
-import com.risosu.EDesalesProgramacionNCapasJunio3.ML.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,27 +23,17 @@ public class Direccion {
     private String NumeroInterior;
     @Column(name = "numeroexterior")
     private String NumeroExterior;
+    @JsonIgnore
     @JoinColumn(name = "idcolonia")
     @ManyToOne
     public Colonia Colonia;
+    @JsonIgnore
     @JoinColumn(name = "idusuario")
     @ManyToOne
     public Usuario Usuario;
-    //public Usuario Usuario;
 
-    public Usuario getUsuario() {
-        return Usuario;
-    }
-
-    public void setUsuario(Usuario Usuario) {
-        this.Usuario = Usuario;
-    }
 
     //Getters
-    public Colonia getColonia() {
-        return Colonia;
-    }
-
     public int getIdDireccion() {
         return IdDireccion;
     }
@@ -76,8 +67,12 @@ public class Direccion {
         this.NumeroInterior = NumeroInterior;
     }
 
-    public void setColonia(Colonia Colonia) {
-        this.Colonia = Colonia;
+    public void setUsuario (Usuario Usuario){
+        this.Usuario = Usuario;
+    }
+    
+    public Usuario getUsuario(){
+        return Usuario;
     }
 
 }

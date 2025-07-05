@@ -4,8 +4,10 @@
  */
 package com.risosu.EDesalesProgramacionNCapasJunio3.DAO;
 
-import com.risosu.EDesalesProgramacionNCapasJunio3.ML.Result;
-import com.risosu.EDesalesProgramacionNCapasJunio3.ML.UsuarioDireccion;
+import com.risosu.EDesalesProgramacionNCapasJunio3.JPA.Result;
+import com.risosu.EDesalesProgramacionNCapasJunio3.JPA.Usuario;
+import com.risosu.EDesalesProgramacionNCapasJunio3.JPA.UsuarioDireccion;
+import java.util.List;
 
 /**
  *
@@ -13,21 +15,13 @@ import com.risosu.EDesalesProgramacionNCapasJunio3.ML.UsuarioDireccion;
  */
 public interface IUsuarioJPADAO {
 
-    Result Add(UsuarioDireccion usuarioDireccion);
-
-    Result UpdateDatosUsuario(UsuarioDireccion usuarioDireccion);
-
     Result GetAll();
-
-    Result AddNuevaDireccionByIdUsuarioJPA(UsuarioDireccion usuarioDireccion);
-
-    Result UpdateAlumnoDatosDireccionJPA(UsuarioDireccion usuarioDireccion);
+    Result GetUsuarioDirecciones(int IdUsuario);
+    Result GetUsuario(int IdUsuario);
+    Result PostAll(UsuarioDireccion usuarioDireccion);
+    Result PostCargaMasiva(List<UsuarioDireccion>usuariosDireccions);
+    Result PutAll(UsuarioDireccion usuarioDireccion);
+    Result DELETEALL(UsuarioDireccion usuarioDireccion);
     
-    Result DeleteAlumno(int idAlumno);
     
-    Result DeleteDireccionByIdDireccion (int idDireccion);
-    
-    Result GetDatosAlumnoPDByIdAlumnoJPA(int IdUsuario);
-    
-    Result GetDatosBasicosUsuarioByIdUsuarioJPA(int IdUsuario);
 }

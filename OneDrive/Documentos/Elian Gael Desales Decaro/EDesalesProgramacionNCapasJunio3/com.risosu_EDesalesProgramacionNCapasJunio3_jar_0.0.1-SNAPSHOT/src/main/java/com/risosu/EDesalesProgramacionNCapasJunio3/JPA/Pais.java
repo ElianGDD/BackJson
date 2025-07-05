@@ -1,7 +1,7 @@
 
 package com.risosu.EDesalesProgramacionNCapasJunio3.JPA;
 
-import com.risosu.EDesalesProgramacionNCapasJunio3.ML.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

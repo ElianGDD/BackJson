@@ -1,7 +1,8 @@
 
 package com.risosu.EDesalesProgramacionNCapasJunio3.JPA;
 
-import com.risosu.EDesalesProgramacionNCapasJunio3.ML.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ public class Estado {
     private int IdEstado;
     @Column(name = "nombre")
     private String Nombre;
+    @JsonIgnore
     @JoinColumn(name = "idpais")
     @ManyToOne
     public Pais Pais;
@@ -39,13 +41,6 @@ public class Estado {
         this.Nombre = Nombre;
     }
 
-    public Pais getPais() {
-        return Pais;
-    }
-
-    public void setPais(Pais Pais) {
-        this.Pais = Pais;
-    }
-    
+ 
    
 }
